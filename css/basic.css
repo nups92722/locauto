@@ -1,0 +1,9 @@
+* {
+    /* all: unset;
+    display: revert; */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.invisible {
+    display: none;
+}
