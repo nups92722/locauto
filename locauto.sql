@@ -155,10 +155,10 @@ CREATE TABLE voiture(
 	id_modele INT NOT NULL,
     CONSTRAINT voiture_modele_FK FOREIGN KEY (id_modele) REFERENCES modele(id_modele),
 	id_type_motorisation INT NOT NULL,
-    CONSTRAINT voiture_type0_FK FOREIGN KEY (id_type) REFERENCES type_motorisation(id_type)
+    CONSTRAINT voiture_type0_FK FOREIGN KEY (id_type_motorisation) REFERENCES type_motorisation(id_type_motorisation)
 );
 
-INSERT INTO modele (immatriculation, compteur, id_modele, id_type_motorisation) VALUES
+INSERT INTO voiture (immatriculation, compteur, id_modele, id_type_motorisation) VALUES
 ('123 ABC 456', 644, 1, ),
 ('215 QKX 284', 45, 2, ),
 ('234 ATV 765', 648, 3, ),
