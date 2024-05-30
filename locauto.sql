@@ -202,7 +202,7 @@ CREATE TABLE louer(
 	immatriculation VARCHAR (16) NOT NULL,
     CONSTRAINT louer_voiture_FK FOREIGN KEY (immatriculation) REFERENCES voiture(immatriculation),
 	id_client INT NOT NULL,
-	CONSTRAINT louer_clients0_FK FOREIGN KEY (id_client) REFERENCES clients(id_client)
+	CONSTRAINT louer_clients0_FK FOREIGN KEY (id_client) REFERENCES client(id_client)
 );
 
 
@@ -214,7 +214,7 @@ CREATE TABLE motorisation_existante(
 	id_modele INT NOT NULL,
     CONSTRAINT motorisation_existante_modele_FK FOREIGN KEY (id_modele) REFERENCES modele(id_modele),
 	id_type_motorisation INT NOT NULL,
-    CONSTRAINT motorisation_existante_type0_FK FOREIGN KEY (id_type_motorisation) REFERENCES type_motorisation(id_type),
+    CONSTRAINT motorisation_existante_type0_FK FOREIGN KEY (id_type_motorisation) REFERENCES type_motorisation(id_type_motorisation),
 
     CONSTRAINT motorisation_existante_PK PRIMARY KEY (id_modele,id_type_motorisation)
 );
@@ -248,7 +248,7 @@ INSERT INTO modele (id_modele, id_type_motorisation, nb_voiture) VALUES
 (26, 2, 1),
 (27, 3, 1),
 (27, 1, 4),
-(27, 4, 1),
+(27, 4, 1);
 
 CREATE TABLE choix_option(
 	id_option INT NOT NULL,
