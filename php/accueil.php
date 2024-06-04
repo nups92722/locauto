@@ -35,5 +35,24 @@
         <li><a href="ajout.php">ajouter</a></li>
         <li><a href="supprime.php">supprimer</a></li>
     </ul>
+
+    <div>
+    <?php // creation du bloc selection des modeles
+        try {
+            $requete = 'SELECT * FROM categorie ORDER BY categorie';
+            $resultat = $connexion->query($requete);
+            $liste_modele = '<select id="e" id="ef"><option value="tous">Tous</option>';
+
+            while ($ligne = $resultat->fetch()) {
+                $liste_modele .= '<option value="'.$ligne['id_categorie'].'">'.$ligne['categorie'].'</option>';
+            }
+            $liste_modele .= '</select>';
+            echo ($liste_modele);
+        } catch (PDOException $e) {
+            echo "Erreur : " . $e->getMessage() . "<br/>";
+            die();
+        }
+    ?> 
+    </div>
 </body>
 </html>
