@@ -219,7 +219,7 @@ CREATE TABLE motorisation_existante(
     CONSTRAINT motorisation_existante_PK PRIMARY KEY (id_modele,id_type_motorisation)
 );
 
-INSERT INTO modele (id_modele, id_type_motorisation, nb_voiture) VALUES
+INSERT INTO motorisation_existante (id_modele, id_type_motorisation, nb_voiture) VALUES
 (1, 1, 1),
 (2, 1, 1),
 (3, 3, 1),
