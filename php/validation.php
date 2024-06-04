@@ -31,7 +31,7 @@
             } else {
                 $immatriculation = $voiture["immatriculation"];
                 $compteur = $voiture["compteur"];
-                $type = $voiture["motorisation"];
+                $motorisation = $voiture["motorisation"];
                 $modele = $voiture["modele"];
                 $nombre_place = $voiture["nb_de_place"];
                 $marque = $voiture["marque"];
@@ -40,12 +40,18 @@
             }
         }
 
+        echo ('<p>la plaque d\'immatriculation est '.$immatriculation.'</p>');
+        echo ('<p>le compteur est '.$compteur.'</p>');
+        echo ('<p>la motorisation est '.$motorisation.'</p>');
+        echo ('<p>le modele est '.$modele.'</p>');
+        echo ('<p>le nombre de place est '.$nombre_place.'</p>');
+        echo ('<p>la marque est '.$marque.'</p>');
+
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage() . "<br/>";
         die();
     }
     ?>
-
     <form action="accueil.php" method="post">
         <input name="valider" type="submit" value="valider">
         <input name="annuler" type="submit" value="annuler">
