@@ -26,15 +26,15 @@
         <div> <!-- bloc modele de l'ajout de voiture -->
             <h2>modele</h2>
 
-            <div id="modele">
-                <input type="checkbox" name="new_modele" id="new_modele" class="invisible"><!-- checkbox pour verifier si c'est un nouveau modele -->
+            <div id="modele" class="tab_block">
+                <input type="checkbox" name="new_modele" id="new_modele" class="check_selected_tab invisible"><!-- checkbox pour verifier si c'est un nouveau modele -->
 
-                <ul class="tab_menu"> <!-- bloc de selection pour le cas modele existant/nouveau -->
+                <ul class="menu_tab"> <!-- bloc de selection pour le cas modele existant/nouveau -->
                     <li class="tab selected">selectionner un modele</li>
                     <li class="tab">nouveau modele</li>
                 </ul>
 
-                <div class="content"> <!-- bloc de selection de modele existant -->
+                <div class="content_tab"> <!-- bloc de selection de modele existant -->
                     <p>selectionner le modele</p>
 
                     <?php // creation du bloc selection des modeles
@@ -55,22 +55,22 @@
                     ?>
                 </div>
 
-                <div class="content invisible"> <!-- bloc d'ajout dun nouveau modele -->
+                <div class="content_tab invisible"> <!-- bloc d'ajout dun nouveau modele -->
                     <p>nom modele :</p>
                     <input name="modele" type="text">
                     
                     <p>nombre de place :</p>
                     <input name="number" type="number">
 
-                    <div id="categorie"> <!-- bloc de selection pour le cas categorie existant/nouveau -->
-                        <input type="checkbox" name="new_categorie" id="new_categorie" class="invisible"><!-- checkbox pour verifier si c'est une nouvelle categorie -->
+                    <div id="categorie" class="tab_block"> <!-- bloc de selection pour le cas categorie existant/nouveau -->
+                        <input type="checkbox" name="new_categorie" id="new_categorie" class="check_selected_tab invisible"><!-- checkbox pour verifier si c'est une nouvelle categorie -->
 
-                        <ul  class="tab_menu">
+                        <ul class="menu_tab">
                             <li class="tab selected">categorie</li>
                             <li class="tab">nouvelle categorie</li>
                         </ul>
 
-                        <div class="content"> <!-- bloc de selection de categorie existante -->
+                        <div class="content_tab"> <!-- bloc de selection de categorie existante -->
                             <p>selectionner le modele</p>
 
                             <?php // creation du bloc selection des categories
@@ -91,7 +91,7 @@
                             ?>
                         </div>
                         
-                        <div class="content invisible"> <!-- bloc d'ajout dune nouvelle categorie -->
+                        <div class="content_tab invisible"> <!-- bloc d'ajout dune nouvelle categorie -->
                             <p>nom categorie :</p>
                             <input name="categorie" type="text">
                         </div> 
@@ -112,17 +112,17 @@
                                                                                                     <br>
                                                                                                     <br>
                                                                                                     <br>   
-            <div id="motorisation"> <!-- bloc de selection pour le cas type existant/nouveau -->
-                <input type="checkbox" name="new_motorisation" id="new_motorisation" class="invisible"><!-- checkbox pour verifier si c'est une nouvelle motorisation -->
+            <div id="motorisation" class="tab_block"> <!-- bloc de selection pour le cas type existant/nouveau -->
+                <input type="checkbox" name="new_motorisation" id="new_motorisation" class="check_selected_tab invisible "><!-- checkbox pour verifier si c'est une nouvelle motorisation -->
 
                 <p>motorisation :</p>
 
-                <ul class="tab_menu">
+                <ul class="menu_tab">
                     <li class="tab selected">type</li>
                     <li class="tab">nouveau type</li>
                 </ul>
 
-                <div class="content"> <!-- bloc de selection de type existant -->
+                <div class="content_tab"> <!-- bloc de selection de type existant -->
                     <p>selectionner le type</p>
 
                     <?php // creation du bloc selection du types
@@ -143,9 +143,9 @@
                     ?>
                 </div>
                 
-                <div class="content invisible"> <!-- bloc d'ajout dun nouveau type -->
+                <div class="content_tab invisible"> <!-- bloc d'ajout dun nouveau type -->
                     <p>nom type :</p>
-                    <input name="type" type="text">
+                    <input name="motorisation" type="text">
                 </div>
             </div>
                                                                                                     <br>
@@ -164,12 +164,12 @@
                                                                                                     <br>
             <div>
                 <p>immatriculation :</p>
-                <input name="immatriculation" type="text" minlength="13" maxlength="13">
+                <input name="immatriculation" type="text" minlength="13" maxlength="13" required>
             </div>
 
             <div>
                 <p>compteur :</p>
-                <input name="compteur" type="number">
+                <input name="compteur" type="number" required>
             </div>
         </div>
 
