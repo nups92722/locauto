@@ -37,15 +37,14 @@
                 $marque = $voiture["marque"];
                 $_SESSION['request'] = 'DELETE FROM voiture WHERE immatriculation = "'.$immatriculation.'"';
                 echo ('<p>bingo   '.$modele.'</p><p>faut faire le resumer de la voiture mais flemme</p>');
+                echo ('<p>la plaque d\'immatriculation est '.$immatriculation.'</p>');
+                echo ('<p>le compteur est '.$compteur.'</p>');
+                echo ('<p>la motorisation est '.$motorisation.'</p>');
+                echo ('<p>le modele est '.$modele.'</p>');
+                echo ('<p>le nombre de place est '.$nombre_place.'</p>');
+                echo ('<p>la marque est '.$marque.'</p>');
             }
         }
-
-        echo ('<p>la plaque d\'immatriculation est '.$immatriculation.'</p>');
-        echo ('<p>le compteur est '.$compteur.'</p>');
-        echo ('<p>la motorisation est '.$motorisation.'</p>');
-        echo ('<p>le modele est '.$modele.'</p>');
-        echo ('<p>le nombre de place est '.$nombre_place.'</p>');
-        echo ('<p>la marque est '.$marque.'</p>');
 
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage() . "<br/>";
