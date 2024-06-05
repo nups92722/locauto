@@ -41,7 +41,7 @@
         try {
             $requete = 'SELECT * FROM categorie ORDER BY categorie';
             $resultat = $connexion->query($requete);
-            $liste_modele = '<select id="e" id="ef"><option value="tous">Tous</option>';
+            $liste_modele = '<select name="e" id="ef"> <option value="tous">Tous</option>';
 
             while ($ligne = $resultat->fetch()) {
                 $liste_modele .= '<option value="'.$ligne['id_categorie'].'">'.$ligne['categorie'].'</option>';
@@ -53,6 +53,33 @@
             die();
         }
     ?> 
+
+<?php
+    try {
+        $requete = 'SELECT * FROM voiture JOIN type_motorisation USING(id_type_motorisation) JOIN modele USING(id_modele) JOIN marque USING(id_marque)';
+        $resultat = $connexion->query($requete);
+        
+        while ($voiture = $resultat->fetch()) {
+            $immatriculation = $voiture["immatriculation"];
+            $compteur = $voiture["compteur"];
+            $motorisation = $voiture["motorisation"];
+            $modele = $voiture["modele"];
+            $nombre_place = $voiture["nb_de_place"];
+            $marque = $voiture["marque"];
+            echo ('<div>');
+            echo ('<p>la plaque d\'immatriculation est '.$immatriculation.'</p>');
+            echo ('<p>le compteur est '.$compteur.'</p>');
+            echo ('<p>la motorisation est '.$motorisation.'</p>');
+            echo ('<p>le modele est '.$modele.'</p>');
+            echo ('<p>le nombre de place est '.$nombre_place.'</p>');
+            echo ('<p>la marque est '.$marque.'</p>');
+            echo ('</div>');
+        }
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage() . "<br/>";
+        die();
+    }
+    ?>
     </div>
 </body>
 </html>

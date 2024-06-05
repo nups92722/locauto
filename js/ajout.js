@@ -1,36 +1,55 @@
-function gestion_requirement(content, value) {
-    let input = content.querySelector('input');
+function collect_input_select(content) {
+    let inputs = content.querySelectorAll('input');
+    let selects = content.querySelectorAll('select');
+    let all = [...inputs, ...selects];
+    
+    return (all);
+}
 
-    if (input != null) {
-        for (let i = 0; i < input.length; i++) {
-            input[i].required = value;
+function gestion_input_requirement(div_onglet) {
+    let contents = collect_content(div_onglet);
+    let input = null;
+    let div_onglets = null;
+
+    for (let i = 0; i < contents.length; i++) {
+        if (contents[i].classList.contains("invisible")) {
+            input = collect_input_select(contents[i]);
+            for (let j = 0; j < input.length; j++) {
+                input[j].disabled = true;
+                input[j].required = false;
+            }
+        } else {
+            input = collect_input_select(contents[i]);
+            for (let j = 0; j < input.length; j++) {
+                input[j].required = true;
+                input[j].disabled = false;
+            }
+            div_onglets = div_onglet.getElementsByClassName("tab_block");
+            for (let j = 0; j < div_onglets.length; j++) {
+                gestion_input_requirement(div_onglets[j])
+            }
         }
     }
 }
 
-function checked_box(id, id_checkbox) {
-    let div_onglet = document.getElementById(id);
-    let tabs = collect_tab(div_onglet);
-    let contents = collect_content(div_onglet);
-    let checkbox = document.getElementById(id_checkbox);
-    
-    tabs[0].addEventListener("click", () => {
-        checkbox.checked = false;
-        gestion_requirement(contents[0], true);
-        gestion_requirement(contents[1], false);
-    });
-    tabs[1].addEventListener("click", () => {
-        checkbox.checked = true;
-        gestion_requirement(contents[0], false);
-        gestion_requirement(contents[1], true);
-    });
+
+
+function event_input_requirement() {
+    let div_onglets = document.getElementsByClassName("tab_block");
+
+    for (let i = 0; i < div_onglets.length; i++) {
+        let div_onglet = div_onglets[i];
+        let tabs = collect_tab(div_onglet);
+
+        for (let i = 0; i < tabs.length; i++) {
+            tabs[i].addEventListener("click", () => {
+                gestion_input_requirement(div_onglet);
+            });
+        };
+    }
 }
 
 window.onload = function() {
-    create_onglet("modele");
-    checked_box("modele", "new_modele");
-    create_onglet("categorie");
-    checked_box("categorie", "new_categorie");
-    create_onglet("motorisation");
-    checked_box("motorisation", "new_motorisation");
+    create_onglet();
+    event_input_requirement();
 };
