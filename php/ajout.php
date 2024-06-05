@@ -27,8 +27,6 @@
             <h2>modele</h2>
 
             <div id="modele" class="tab_block">
-                <input type="checkbox" name="new_modele" id="new_modele" class="check_selected_tab invisible"><!-- checkbox pour verifier si c'est un nouveau modele -->
-
                 <ul class="menu_tab"> <!-- bloc de selection pour le cas modele existant/nouveau -->
                     <li class="tab selected">selectionner un modele</li>
                     <li class="tab">nouveau modele</li>
@@ -57,14 +55,12 @@
 
                 <div class="content_tab invisible"> <!-- bloc d'ajout dun nouveau modele -->
                     <p>nom modele :</p>
-                    <input name="modele" type="text">
+                    <input name="modele" type="text" disabled>
                     
                     <p>nombre de place :</p>
-                    <input name="number" type="number">
+                    <input name="number" type="number" disabled>
 
                     <div id="categorie" class="tab_block"> <!-- bloc de selection pour le cas categorie existant/nouveau -->
-                        <input type="checkbox" name="new_categorie" id="new_categorie" class="check_selected_tab invisible"><!-- checkbox pour verifier si c'est une nouvelle categorie -->
-
                         <ul class="menu_tab">
                             <li class="tab selected">categorie</li>
                             <li class="tab">nouvelle categorie</li>
@@ -77,7 +73,7 @@
                                 try {
                                     $requete = 'SELECT * FROM categorie ORDER BY categorie';
                                     $resultat = $connexion->query($requete);
-                                    $liste_modele = '<select id="d" id="ef">';
+                                    $liste_modele = '<select id="d" id="ef" disabled>';
 
                                     while ($ligne = $resultat->fetch()) {
                                         $liste_modele .= '<option value="'.$ligne['id_categorie'].'">'.$ligne['categorie'].'</option>';
@@ -93,7 +89,7 @@
                         
                         <div class="content_tab invisible"> <!-- bloc d'ajout dune nouvelle categorie -->
                             <p>nom categorie :</p>
-                            <input name="categorie" type="text">
+                            <input name="categorie" type="text" disabled>
                         </div> 
                     </div>
                 </div>
@@ -145,7 +141,7 @@
                 
                 <div class="content_tab invisible"> <!-- bloc d'ajout dun nouveau type -->
                     <p>nom type :</p>
-                    <input name="motorisation" type="text">
+                    <input name="motorisation" type="text" disabled>
                 </div>
             </div>
                                                                                                     <br>

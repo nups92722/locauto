@@ -1,68 +1,55 @@
-function gestion_input_requirement(content, value) {
-    let input = content.querySelectorAll('input');
+function collect_input_select(content) {
+    let inputs = content.querySelectorAll('input');
+    let selects = content.querySelectorAll('select');
+    let all = [...inputs, ...selects];
+    
+    return (all);
+}
 
-    if (input != null) {
-        for (let i = 0; i < input.length; i++) {
-            if (!input[i].classList.contains("check_selected_tab")){
-                input[i].required = value;
+function gestion_input_requirement(div_onglet) {
+    let contents = collect_content(div_onglet);
+    let input = null;
+    let div_onglets = null;
+
+    for (let i = 0; i < contents.length; i++) {
+        if (contents[i].classList.contains("invisible")) {
+            input = collect_input_select(contents[i]);
+            for (let j = 0; j < input.length; j++) {
+                input[j].disabled = true;
+                input[j].required = false;
             }
-            if (value == false) {
-                input[i].disabled = true;
-            } else {
-                input[i].disabled = false;
+        } else {
+            input = collect_input_select(contents[i]);
+            for (let j = 0; j < input.length; j++) {
+                input[j].required = true;
+                input[j].disabled = false;
+            }
+            div_onglets = div_onglet.getElementsByClassName("tab_block");
+            for (let j = 0; j < div_onglets.length; j++) {
+                gestion_input_requirement(div_onglets[j])
             }
         }
     }
 }
 
-function gestion_inner_checked_box(div) {
-    let div_onglets = div.getElementsByClassName("tab_block");
-    console.log(div_onglets);
+
+
+function event_input_requirement() {
+    let div_onglets = document.getElementsByClassName("tab_block");
 
     for (let i = 0; i < div_onglets.length; i++) {
         let div_onglet = div_onglets[i];
-        let checkbox = div_onglet.getElementsByClassName("check_selected_tab")[0];
-        let contents = collect_content(div_onglet);
+        let tabs = collect_tab(div_onglet);
 
-        console.log(checkbox.checked, div_onglet);
-
-        if(checkbox.checked == false) {
-            gestion_input_requirement(contents[0], true);
-            gestion_input_requirement(contents[1], false);
-            console.log("click", checkbox.checked);
-        } else {
-            gestion_input_requirement(contents[0], false);
-            gestion_input_requirement(contents[1], true);
-            console.log("click", checkbox.checked);
+        for (let i = 0; i < tabs.length; i++) {
+            tabs[i].addEventListener("click", () => {
+                gestion_input_requirement(div_onglet);
+            });
         };
     }
 }
 
-function gestion_checked_box() {
-    let div_onglets = document.getElementsByClassName("tab_block");
-    let all_checkbox = document.getElementsByClassName("check_selected_tab");
-
-    for (let i = 0; i < div_onglets.length; i++) {
-        let div_onglet = div_onglets[i];
-        let checkbox =  all_checkbox[i];
-        let tabs = collect_tab(div_onglet);
-        let contents = collect_content(div_onglet);
-
-        tabs[0].addEventListener("click", () => {
-            checkbox.checked = false;
-            gestion_input_requirement(contents[0], true);
-            gestion_input_requirement(contents[1], false);
-        });
-        tabs[1].addEventListener("click", () => {
-            checkbox.checked = true;
-            gestion_input_requirement(contents[0], false);
-            gestion_input_requirement(contents[1], true);
-            gestion_inner_checked_box(div_onglet);
-        });
-    }
-}
-
 window.onload = function() {
-    gestion_checked_box();
     create_onglet();
+    event_input_requirement();
 };
