@@ -83,7 +83,7 @@
             echo ('<img src="../image/'.$voiture["imagee"].'" alt="Voiture">');
             echo ('<h3>Modèle : '.$voiture["modele"].'</h3>');
             echo ('<p>Marque : '.$voiture["marque"].'</p>');
-            echo ('<a href="#" class="btn">Réserver</a>');
+            echo ('<a href="voiture.php?modele='.$voiture["id_modele"].'" class="btn">Réserver</a>');
             echo ('</div>');
         }
     } catch (PDOException $e) {
