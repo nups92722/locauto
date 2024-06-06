@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/basic.css">
     <link rel="stylesheet" href="../css/onglet.css">
+    <link rel="stylesheet" href="../css/basic.css">
     <script src="../js/onglet.js"></script>
     <script src="../js/ajout.js"></script>
     <title>Document</title>
@@ -165,7 +165,7 @@
                 
                 <div class="content_tab invisible"> <!-- bloc d'ajout dun nouveau type -->
                     <h3>Nom type :</h3>
-                    <input name="motorisation" type="text" disabled>
+                    <input name="motorisation" type="text" disabled class="valider">
                 </div>
             </div>
                                                                                                     <br>
