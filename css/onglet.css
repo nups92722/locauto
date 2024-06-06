@@ -1,3 +1,31 @@
+body{
+    font-family: 'Exo', sans-serif;
+    background-color: silver;
+}
+
+
+p{
+    color:black;
+}
+
+h1{
+    text-align:center;
+    text-transform: uppercase;
+    color: white;
+    font-size: 4em;
+}
+
+h2{
+    color:white;
+    font-size: 2em;
+    text-decoration: underline;
+}
+
+h3{
+    color:white;
+    font-size: 1.5em;
+}
+
 .menu_tab {
     align-items: center;
     justify-content: space-around;
@@ -6,14 +34,45 @@
     display: flex;
 }
 
-.tab_block {
-    background-color: aliceblue;
-}
-
 .selected {
-    background-color: rgb(92, 197, 242);
+    background-color: rgb(2, 2, 2);
 }
 
 .content_tab {
     position: absolute;
 }
+
+.tab{
+
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.5em;
+}
+.tab:hover{
+    background-color: black;
+}
+
+select {
+    /* Reset Select */
+    appearance: none;
+    outline: 10px red;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+    color: #fff;
+    background-color: var(--darkgray);
+    background-image: none;
+    cursor: pointer;
+  }
+  /* Remove IE arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select wrapper */

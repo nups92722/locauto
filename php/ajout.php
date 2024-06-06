@@ -11,6 +11,20 @@
 </head>
 
 <body>
+<header class="header-outer">
+	<div class="header-inner responsive-wrapper">
+		<div class="header-logo">
+			<img src="../image/logovrai.png" />
+		</div>
+		<nav class="header-navigation">
+                <a href="accueil.php">Accueil</a>
+                <a href="ajout.php">Ajouter voiture</a>
+                <a href="supprime.php">Supprimer voiture</a>
+			<button>Menu</button>
+		</nav>
+	</div>
+</header>
+
     <?php
         try {
             $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', ''); // ajouter le nom de la base de donne
@@ -19,27 +33,27 @@
             die();
         }
     ?>
-
     <h1>ajouter une voiture</h1>
+   
 
     <form action="validation.php"> <!-- bloc pour ajouter une voiture -->
         <div> <!-- bloc modele de l'ajout de voiture -->
-            <h2>modele</h2>
+            <h2>Choix du modèle:</h2>
 
             <div id="modele" class="tab_block">
                 <ul class="menu_tab"> <!-- bloc de selection pour le cas modele existant/nouveau -->
-                    <li class="tab selected">selectionner un modele</li>
-                    <li class="tab">nouveau modele</li>
+                    <li class="tab selected" style="--c:#E95A49">Sélectionner un modèle déjà existant</li>
+                    <li class="tab" style="--c:#E95A49">Créer un nouveau modèle</li>
                 </ul>
 
                 <div class="content_tab"> <!-- bloc de selection de modele existant -->
-                    <p>selectionner le modele</p>
+                    <h3>Liste des modèles</h3>
 
                     <?php // creation du bloc selection des modeles
                         try {
                             $requete = 'SELECT * FROM modele ORDER BY modele';
                             $resultat = $connexion->query($requete);
-                            $liste_modele = '<select id="e" id="ef">';
+                            $liste_modele = '<select>';
 
                             while ($ligne = $resultat->fetch()) {
                                 $liste_modele .= '<option value="'.$ligne['id_modele'].'">'.$ligne['modele'].'</option>';
@@ -54,20 +68,20 @@
                 </div>
 
                 <div class="content_tab invisible"> <!-- bloc d'ajout dun nouveau modele -->
-                    <p>nom modele :</p>
+                    <h3>Nom modèle :</h3>
                     <input name="modele" type="text" disabled>
                     
-                    <p>nombre de place :</p>
+                    <h3>Nombre de place :</h3>
                     <input name="number" type="number" disabled>
 
                     <div id="categorie" class="tab_block"> <!-- bloc de selection pour le cas categorie existant/nouveau -->
                         <ul class="menu_tab">
-                            <li class="tab selected">categorie</li>
-                            <li class="tab">nouvelle categorie</li>
+                            <li class="tab selected">Catégorie</li>
+                            <li class="tab">Créer nouvelle catégorie</li>
                         </ul>
 
                         <div class="content_tab"> <!-- bloc de selection de categorie existante -->
-                            <p>selectionner le modele</p>
+                            <h3>Selectionner le modèle</h3>
 
                             <?php // creation du bloc selection des categories
                                 try {
@@ -88,7 +102,7 @@
                         </div>
                         
                         <div class="content_tab invisible"> <!-- bloc d'ajout dune nouvelle categorie -->
-                            <p>nom categorie :</p>
+                            <h3>Nom categorie :</h3>
                             <input name="categorie" type="text" disabled>
                         </div> 
                     </div>
@@ -107,19 +121,29 @@
                                                                                                     <br>
                                                                                                     <br>
                                                                                                     <br>
-                                                                                                    <br>   
+                                                                                                    <br>
+                                                                                                    <br> 
+                                                                                                    <br>  
+                                                                                                    <br>  
+                                                                                                    <br>  
+                                                                                                    <br>  
+                                                                                                    <br>  
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+
             <div id="motorisation" class="tab_block"> <!-- bloc de selection pour le cas type existant/nouveau -->
                 <input type="checkbox" name="new_motorisation" id="new_motorisation" class="check_selected_tab invisible "><!-- checkbox pour verifier si c'est une nouvelle motorisation -->
 
-                <p>motorisation :</p>
+                <h3>Motorisation :</h3>
 
                 <ul class="menu_tab">
-                    <li class="tab selected">type</li>
-                    <li class="tab">nouveau type</li>
+                    <li class="tab selected">Type</li>
+                    <li class="tab">Nouveau type</li>
                 </ul>
 
                 <div class="content_tab"> <!-- bloc de selection de type existant -->
-                    <p>selectionner le type</p>
+                    <h3>Selectionner le type</h3>
 
                     <?php // creation du bloc selection du types
                     try {
@@ -140,7 +164,7 @@
                 </div>
                 
                 <div class="content_tab invisible"> <!-- bloc d'ajout dun nouveau type -->
-                    <p>nom type :</p>
+                    <h3>Nom type :</h3>
                     <input name="motorisation" type="text" disabled>
                 </div>
             </div>
@@ -159,12 +183,12 @@
                                                                                                     <br>
                                                                                                     <br>
             <div>
-                <p>immatriculation :</p>
+                <h3>Immatriculation :</h3>
                 <input name="immatriculation" type="text" minlength="13" maxlength="13" required>
             </div>
 
             <div>
-                <p>compteur :</p>
+                <h3>Compteur :</h3>
                 <input name="compteur" type="number" required>
             </div>
         </div>
