@@ -1,31 +1,31 @@
 CREATE TABLE option(
-	id_option INT NOT NULL PRIMARY KEY,
+	id_option INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	option_location VARCHAR (256) NOT NULL,
 	prix INT NOT NULL
 );
 
-INSERT INTO option (id_option, option_location, prix) VALUES
-(1, 'Assurance complementaire', '50.00'),
-(2, 'Nettoyage', '75.00'),
-(3, 'Complement carburant', '30.00'),
-(4, 'Retour autre ville', '250.00'),
-(5, 'Rabais dimanche', '-40.00');
+INSERT INTO option (option_location, prix) VALUES
+('Assurance complementaire', '50.00'),
+('Nettoyage', '75.00'),
+('Complement carburant', '30.00'),
+('Retour autre ville', '250.00'),
+('Rabais dimanche', '-40.00');
 
 
 CREATE TABLE type_client(
-	id_type_client INT NOT NULL PRIMARY KEY,
+	id_type_client INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	type_client VARCHAR (256) NOT NULL
 );
 
-INSERT INTO type_client (id_type_client, type_client) VALUES
-(1, 'Particulier'),
-(2, 'Entreprise'),
-(3, 'Administration'),
-(4, 'Association'),
-(5, 'Longue duree');
+INSERT INTO type_client (type_client) VALUES
+('Particulier'),
+('Entreprise'),
+('Administration'),
+('Association'),
+('Longue duree');
 
 CREATE TABLE client(
-	id_client INT NOT NULL PRIMARY KEY,
+	id_client INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	nom VARCHAR (256) NOT NULL,
 	prenom VARCHAR (256) NOT NULL,
 	adresse VARCHAR (256) NOT NULL,
@@ -33,45 +33,45 @@ CREATE TABLE client(
     CONSTRAINT clients_typesclients_FK FOREIGN KEY (id_type_client) REFERENCES type_client(id_type_client)
 );
 
-INSERT INTO client (id_client, nom, prenom, adresse, id_type_client) VALUES
-(1, 'gallo', 'jack', '4 rue du paysan', 1),
-(2, 'chevalier', 'michel', '5 rue du chateau', 4),
-(3, 'chateau', 'jean-francois', '95 rue du paradis', 4),
-(4, 'piano', 'mozart', '1 impasse du paradis', 1),
-(5, 'latouche', 'jean', '45 avenue mozart', 2),
-(6, 'valton', 'bernard', '36 boulevard des enfants', 1),
-(7, 'leprince', 'nicolas', '7 rue du plessix', 3),
-(8, 'bourin', 'brutus', '4 rue du maroilles', 1),
-(9, 'pyramide', 'cleopate', '36 rue du gruyere', 1),
-(10, 'freecs', 'gon', '200 avenue napoleon', 1),
-(11, 'cycliste', 'gon', '98 impasse des ardennes', 4),
-(12, 'ronaldo', 'jean', '45 boulevard des girafes', 5),
-(13, 'gallet', 'pierre', '14 rue du massage', 1),
-(14, 'delarue', 'judite', 'bois de boulogne', 3),
-(15, 'delatirgie', 'mireille', '84 rue du paysan', 1),
-(16, 'catho', 'marie', '94 rue du paradis', 2),
-(17, 'gallais', 'corentin', '4 La Saudrais', 5);
+INSERT INTO client (nom, prenom, adresse, id_type_client) VALUES
+('gallo', 'jack', '4 rue du paysan', 1),
+('chevalier', 'michel', '5 rue du chateau', 4),
+('chateau', 'jean-francois', '95 rue du paradis', 4),
+('piano', 'mozart', '1 impasse du paradis', 1),
+('latouche', 'jean', '45 avenue mozart', 2),
+('valton', 'bernard', '36 boulevard des enfants', 1),
+('leprince', 'nicolas', '7 rue du plessix', 3),
+('bourin', 'brutus', '4 rue du maroilles', 1),
+('pyramide', 'cleopate', '36 rue du gruyere', 1),
+('freecs', 'gon', '200 avenue napoleon', 1),
+('cycliste', 'gon', '98 impasse des ardennes', 4),
+('ronaldo', 'jean', '45 boulevard des girafes', 5),
+('gallet', 'pierre', '14 rue du massage', 1),
+('delarue', 'judite', 'bois de boulogne', 3),
+('delatirgie', 'mireille', '84 rue du paysan', 1),
+('catho', 'marie', '94 rue du paradis', 2),
+('gallais', 'corentin', '4 La Saudrais', 5);
 
 
 
 CREATE TABLE categorie(
-	id_categorie VARCHAR (1) NOT NULL PRIMARY KEY,
+	id_categorie INT (1) AUTO_INCREMENT NOT NULL PRIMARY KEY,
 	categorie VARCHAR (256) NOT NULL,
 	prix INT  NOT NULL
 );
 
-INSERT INTO categorie (id_categorie, categorie, prix) VALUES
-('A', 'Citadine', '60.00'),
-('B', 'Economique', '72.00'),
-('C', 'Compacte', '80.00'),
-('D', 'Intermediaire', '95.00'),
-('E', 'Berline', '120.00'),
-('F', 'Grande berline', '150.00'),
-('G', 'Sport, SUV', '230.00'),
-('V', 'Luxe', '350.00');
+INSERT INTO categorie (categorie, prix) VALUES
+('Citadine', '60.00'),
+('Economique', '72.00'),
+('Compacte', '80.00'),
+('Intermediaire', '95.00'),
+('Berline', '120.00'),
+('Grande berline', '150.00'),
+('Sport, SUV', '230.00'),
+('Luxe', '350.00');
 
 CREATE TABLE marque(
-	id_marque INT NOT NULL PRIMARY KEY,
+	id_marque INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	marque VARCHAR (256) NOT NULL
 );
 
@@ -96,7 +96,7 @@ INSERT INTO marque (id_marque, marque) VALUES
 
 
 CREATE TABLE modele(
-	id_modele INT NOT NULL PRIMARY KEY,
+	id_modele INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	modele VARCHAR (256) NOT NULL,
 	imagee VARCHAR (64) NOT NULL,
 	nb_de_place INT NOT NULL,
@@ -106,46 +106,46 @@ CREATE TABLE modele(
     CONSTRAINT modele_marque0_FK FOREIGN KEY (id_marque) REFERENCES marque(id_marque)
 );
 
-INSERT INTO modele (id_modele, id_marque, modele, imagee, nb_de_place, id_categorie) VALUES
-(1, 16, 'Giulietta', 'alfa-romeo-giulietta.jpg', 5, 'D'),
-(2, 4, 'S-Max', 'ford-smax.jpg', 5, 'E'),
-(3, 9, 'Série 3', 'bmw-3.jpg', 5, 'D'),
-(4, 9, 'Série 7', 'bmw-7.jpg', 5, 'F'),
-(5, 2, 'Polo', 'vw-polo.jpg', 5, 'B'),
-(6, 4, 'Kuga', 'ford-kuga.jpg', 5, 'G'),
-(7, 1, '308', 'peugeot-308.jpg', 5, 'B'),
-(8, 6, 'Cinquecento', 'fiat-500.jpg', 5, 'A'),
-(9, 3, 'Classe E', 'mercedes-e.jpg', 5, 'F'),
-(10, 1, '308 Break', 'peugeot-308-break.jpg', 5, 'C'),
-(11, 11, 'Q50', 'infiniti-q50.jpg', 5, 'G'),
-(12, 9, 'X5', 'bmw-x5.jpg', 5, 'V'),
-(13, 13, 'Astra Break', 'opel-astra-break.jpg', 5, 'D'),
-(14, 12, 'For Two', 'smart-fortwo.jpg', 5, 'A'),
-(15, 3, 'Classe B', 'mercedes-b.jpg', 5, 'E'),
-(16, 5, 'Jumpy 9 places', 'citroen-jumpy.jpg', 9, 'E'),
-(17, 1, '3008', 'peugeot-3008.jpg', 5, 'D'),
-(18, 4, 'C-Max', 'ford-cmax.jpg', 5, 'D'),
-(19, 11, 'Octavia Break', 'skoda-octavia-break.jpg', 5, 'D'),
-(20, 666, 'La classe', '', 2, 'G'),
-(21, 9, 'X1', 'bmw-x1.jpg', 5, 'G'),
-(22, 2, 'Scirocco', 'vw-scirocco.jpg', 5, 'D'),
-(23, 10, 'XF', 'jaguar-xf.jpg', 5, 'V'),
-(24, 9, 'Série 3 Break', 'bmw-3-break.jpg', 5, 'E'),
-(25, 8, 'Cooper', 'mini-cooper.jpg', 5, 'C'),
-(26, 7, 'Panamera', 'porsche-panamera.jpg', 5, 'V'),
-(27, 2, 'Passat Break', 'vw-passat-break.jpg', 5, 'C');
+INSERT INTO modele (id_marque, modele, imagee, nb_de_place, id_categorie) VALUES
+(16, 'Giulietta', 'alfa-romeo-giulietta.jpg', 5, 'D'),
+(4, 'S-Max', 'ford-smax.jpg', 5, 'E'),
+(9, 'Série 3', 'bmw-3.jpg', 5, 'D'),
+(9, 'Série 7', 'bmw-7.jpg', 5, 'F'),
+(2, 'Polo', 'vw-polo.jpg', 5, 'B'),
+(4, 'Kuga', 'ford-kuga.jpg', 5, 'G'),
+(1, '308', 'peugeot-308.jpg', 5, 'B'),
+(6, 'Cinquecento', 'fiat-500.jpg', 5, 'A'),
+(3, 'Classe E', 'mercedes-e.jpg', 5, 'F'),
+(1, '308 Break', 'peugeot-308-break.jpg', 5, 'C'),
+(11, 'Q50', 'infiniti-q50.jpg', 5, 'G'),
+(9, 'X5', 'bmw-x5.jpg', 5, 'V'),
+(13, 'Astra Break', 'opel-astra-break.jpg', 5, 'D'),
+(12, 'For Two', 'smart-fortwo.jpg', 5, 'A'),
+(3, 'Classe B', 'mercedes-b.jpg', 5, 'E'),
+(5, 'Jumpy 9 places', 'citroen-jumpy.jpg', 9, 'E'),
+(1, '3008', 'peugeot-3008.jpg', 5, 'D'),
+(4, 'C-Max', 'ford-cmax.jpg', 5, 'D'),
+(11, 'Octavia Break', 'skoda-octavia-break.jpg', 5, 'D'),
+(666, 'La classe', '', 2, 'G'),
+(9, 'X1', 'bmw-x1.jpg', 5, 'G'),
+(2, 'Scirocco', 'vw-scirocco.jpg', 5, 'D'),
+(10, 'XF', 'jaguar-xf.jpg', 5, 'V'),
+(9, 'Série 3 Break', 'bmw-3-break.jpg', 5, 'E'),
+(8, 'Cooper', 'mini-cooper.jpg', 5, 'C'),
+(7, 'Panamera', 'porsche-panamera.jpg', 5, 'V'),
+(2, 'Passat Break', 'vw-passat-break.jpg', 5, 'C');
 
 CREATE TABLE type_motorisation(
-	id_type_motorisation INT NOT NULL PRIMARY KEY,
+	id_type_motorisation INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	motorisation VARCHAR (256) NOT NULL
 );
 
-INSERT INTO type_motorisation (id_type_motorisation, motorisation) VALUES
-(1, 'Essence'),
-(2, 'Hybride'),
-(3, 'Diesel'),
-(4, 'Gpl'),
-(5, 'Ethanol');
+INSERT INTO type_motorisation (motorisation) VALUES
+('Essence'),
+('Hybride'),
+('Diesel'),
+('Gpl'),
+('Ethanol');
 
 
 
@@ -194,7 +194,7 @@ INSERT INTO voiture (immatriculation, compteur, id_modele, id_type_motorisation)
 
 
 CREATE TABLE louer(
-	id_louer INT NOT NULL PRIMARY KEY,
+	id_louer INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	date_debut DATE NOT NULL ,
 	date_fin DATE NOT NULL ,
 	compteur_debut INT NOT NULL ,
@@ -227,8 +227,8 @@ INSERT INTO motorisation_existante (id_modele, id_type_motorisation, nb_voiture)
 (5, 1, 1),
 (6, 2, 1),
 (7, 1, 1),
-(8, 5,  1),
-(9, 3,  1),
+(8, 5, 1),
+(9, 3, 1),
 (10, 3, 1),
 (11, 4, 1),
 (12, 1, 1),
