@@ -8,15 +8,63 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-        session_start();
+<?php
+      session_start();
 
-        try {
-            $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', ''); // ajouter le nom de la base de donne
-            } catch (PDOException $e) {
-            echo "Erreur : " . $e->getMessage() . "<br/>";
-            die();
-        }
+      try {
+          $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', ''); // ajouter le nom de la base de donne
+          } catch (PDOException $e) {
+          echo "Erreur : " . $e->getMessage() . "<br/>";
+          die();
+      }
+
+      try {
+        if (isset($_SESSION['nouvelle_motorisation'])) {
+          $requete = 'INSERT INTO type_motorisation (motorisation) VALUES ("'.$_SESSION['nouvelle_motorisation'].'")';
+          $resultat = $connexion->query($requete);
+          unset($_SESSION['nouvelle_motorisation']);
+          $_SESSION['motorisation'] = $connexion->lastInsertId();
+          }
+        } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage() . "<br/>";
+        die();
+      }
+
+      try {
+        if (isset($_SESSION['nouvelle_categorie'])) {
+          $requete = 'INSERT INTO categorie (categorie, prix) VALUES ("'.$_SESSION['nouvelle_categorie'].'", 10)';
+          $resultat = $connexion->query($requete);
+          unset($_SESSION['nouvelle_categorie']);
+          $_SESSION['categorie'] = $connexion->lastInsertId();
+          }
+        } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage() . "<br/>";
+        die();
+      }
+
+      try {
+        if (isset($_SESSION['nouveau_modele'])) {
+          $requete = 'INSERT INTO modele (id_marque, modele, imagee, nb_de_place, id_categorie) VALUES (1, "'.$_SESSION['nouveau_modele'].'", "dd", '.$_SESSION['nombre_place'].', '.$_SESSION['categorie'].')';
+          $resultat = $connexion->query($requete);
+          unset($_SESSION['nouveau_modele']);
+          $_SESSION['modele'] = $connexion->lastInsertId();
+          }
+        } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage() . "<br/>";
+        die();
+      }
+
+      /*try {
+        if (isset($_SESSION['nouveau_modele'])) {
+          $requete = 'INSERT INTO modele (id_marque, modele, imagee, nb_de_place, id_categorie) VALUES (1, '.$_SESSION['nouveau_modele'].', "dd", '.$_SESSION['nombre_place'].', '.$_SESSION['categorie'].')';
+          $resultat = $connexion->query($requete);
+          unset($_SESSION['nouveau_modele']);
+          $_SESSION['modele'] = $connexion->lastInsertId();
+          }
+        } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage() . "<br/>";
+        die();
+      }*/
     ?>
 
     <header class="header-outer">

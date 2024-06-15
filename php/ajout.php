@@ -35,12 +35,11 @@
     ?>
     <h1>ajouter une voiture</h1>
    
-
-    <form action="validation.php"> <!-- bloc pour ajouter une voiture -->
+    <form action="validation.php" method="post"> <!-- bloc pour ajouter une voiture -->
         <div> <!-- bloc modele de l'ajout de voiture -->
             <h2>Choix du modèle:</h2>
 
-            <div id="modele" class="tab_block">
+            <div class="tab_block">
                 <ul class="menu_tab"> <!-- bloc de selection pour le cas modele existant/nouveau -->
                     <li class="tab selected" style="--c:#E95A49">Sélectionner un modèle déjà existant</li>
                     <li class="tab" style="--c:#E95A49">Créer un nouveau modèle</li>
@@ -53,7 +52,7 @@
                         try {
                             $requete = 'SELECT * FROM modele ORDER BY modele';
                             $resultat = $connexion->query($requete);
-                            $liste_modele = '<select>';
+                            $liste_modele = '<select name="model">';
 
                             while ($ligne = $resultat->fetch()) {
                                 $liste_modele .= '<option value="'.$ligne['id_modele'].'">'.$ligne['modele'].'</option>';
@@ -69,12 +68,12 @@
 
                 <div class="content_tab invisible"> <!-- bloc d'ajout dun nouveau modele -->
                     <h3>Nom modèle :</h3>
-                    <input name="modele" type="text" disabled>
+                    <input name="new_model" type="text" disabled>
                     
                     <h3>Nombre de place :</h3>
-                    <input name="number" type="number" disabled>
+                    <input name="new_seat" type="number" disabled>
 
-                    <div id="categorie" class="tab_block"> <!-- bloc de selection pour le cas categorie existant/nouveau -->
+                    <div class="tab_block"> <!-- bloc de selection pour le cas categorie existant/nouveau -->
                         <ul class="menu_tab">
                             <li class="tab selected">Catégorie</li>
                             <li class="tab">Créer nouvelle catégorie</li>
@@ -87,7 +86,7 @@
                                 try {
                                     $requete = 'SELECT * FROM categorie ORDER BY categorie';
                                     $resultat = $connexion->query($requete);
-                                    $liste_modele = '<select id="d" id="ef" disabled>';
+                                    $liste_modele = '<select name="category" disabled>';
 
                                     while ($ligne = $resultat->fetch()) {
                                         $liste_modele .= '<option value="'.$ligne['id_categorie'].'">'.$ligne['categorie'].'</option>';
@@ -103,7 +102,7 @@
                         
                         <div class="content_tab invisible"> <!-- bloc d'ajout dune nouvelle categorie -->
                             <h3>Nom categorie :</h3>
-                            <input name="categorie" type="text" disabled>
+                            <input name="new_category" type="text" disabled>
                         </div> 
                     </div>
                 </div>
@@ -132,7 +131,7 @@
                                                                                                     <br>
                                                                                                     <br>
 
-            <div id="motorisation" class="tab_block"> <!-- bloc de selection pour le cas type existant/nouveau -->
+            <div class="tab_block"> <!-- bloc de selection pour le cas type existant/nouveau -->
                 <input type="checkbox" name="new_motorisation" id="new_motorisation" class="check_selected_tab invisible "><!-- checkbox pour verifier si c'est une nouvelle motorisation -->
 
                 <h3>Motorisation :</h3>
@@ -149,7 +148,7 @@
                     try {
                         $requete = 'SELECT * FROM type_motorisation ORDER BY motorisation';
                         $resultat = $connexion->query($requete);
-                        $liste_modele = '<select id="f" id="ef">';
+                        $liste_modele = '<select name="motorisation">';
 
                         while ($ligne = $resultat->fetch()) {
                             $liste_modele .= '<option value="'.$ligne['id_type_motorisation'].'">'.$ligne['motorisation'].'</option>';
@@ -165,7 +164,7 @@
                 
                 <div class="content_tab invisible"> <!-- bloc d'ajout dun nouveau type -->
                     <h3>Nom type :</h3>
-                    <input name="motorisation" type="text" disabled class="valider">
+                    <input name="new_motorisation" type="text" disabled class="valider">
                 </div>
             </div>
                                                                                                     <br>
@@ -189,7 +188,7 @@
 
             <div>
                 <h3>Compteur :</h3>
-                <input name="compteur" type="number" required>
+                <input name="meter" type="number" required>
             </div>
         </div>
 
