@@ -61,29 +61,37 @@
                 // gestion info categorie
                 if (isset($_POST['category'])) {
                     $_SESSION['categorie'] = $_POST['category'];
-                    $requete = 'SELECT * FROM categorie';
+                    $requete = 'SELECT * FROM categorie WHERE id_categorie = '.$_POST['category'].'';
                     $resultat = $connexion->query($requete);
                     $ligne = $resultat->fetch();
                     $categorie = $ligne['categorie'];
                 } else {
                     $_SESSION['nouvelle_categorie'] = $categorie = $_POST['new_category'];
                 }
+                if (isset($_POST['brand'])) {
+                    $_SESSION['brand'] = $_POST['brand'];
+                    $requete = 'SELECT * FROM categorie WHERE id_categorie = '.$_POST['brand'].'';
+                    $resultat = $connexion->query($requete);
+                    $ligne = $resultat->fetch();
+                    $categorie = $ligne['marque'];
+                } else {
+                    $_SESSION['nouvelle_categorie'] = $categorie = $_POST['new_category'];
+                }
             }
+            // gestion info motorisation
+            if (isset($_POST['motorisation'])) {
+                $_SESSION['motorisation'] = $_POST['motorisation'];
+                $requete = 'SELECT * FROM type_motorisation WHERE id_type_motorisation = '.$_POST['motorisation'].'';
+                $resultat = $connexion->query($requete);
+                $ligne = $resultat->fetch();
+                $motorisation = $ligne['motorisation'];
+            } else {
+                $_SESSION['nouvelle_motorisation'] = $motorisation = $_POST['new_motorisation'];
+            }
+            $_SESSION['immatriculation'] = $immatriculation = $_POST["immatriculation"];
+            $_SESSION['compteur'] = $compteur = $_POST["meter"];
+            print_car_data($immatriculation, $compteur, $motorisation, $modele, $nombre_place, $categorie);
         }
-        // gestion info motorisation
-        if (isset($_POST['motorisation'])) {
-            $_SESSION['motorisation'] = $_POST['motorisation'];
-            $requete = 'SELECT * FROM type_motorisation WHERE id_type_motorisation = '.$_POST['motorisation'].'';
-            $resultat = $connexion->query($requete);
-            $ligne = $resultat->fetch();
-            $motorisation = $ligne['motorisation'];
-        } else {
-            $_SESSION['nouvelle_motorisation'] = $motorisation = $_POST['new_motorisation'];
-        }
-        $_SESSION['immatriculation'] = $immatriculation = $_POST["immatriculation"];
-        $_SESSION['compteur'] = $compteur = $_POST["meter"];
-        print_car_data($immatriculation, $compteur, $motorisation, $modele, $nombre_place, $categorie);
-        echo ('<p>go ajouter la voiture</p>');
 
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage() . "<br/>";

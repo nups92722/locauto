@@ -105,8 +105,74 @@
                             <input name="new_category" type="text" disabled>
                         </div> 
                     </div>
+                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>  
+                                                                                                    <br>  
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                    <div class="tab_block"> <!-- bloc de selection pour le cas marque existant/nouveau -->
+                        <ul class="menu_tab">
+                            <li class="tab selected">Marque</li>
+                            <li class="tab">Créer nouvelle marque</li>
+                        </ul>
+
+                        <div class="content_tab"> <!-- bloc de selection de maarque existante -->
+                            <h3>Selectionner la marque</h3>
+
+                            <?php // creation du bloc selection des marques
+                                try {
+                                    $requete = 'SELECT * FROM marque ORDER BY marque';
+                                    $resultat = $connexion->query($requete);
+                                    $liste_modele = '<select name="brand" disabled>';
+
+                                    while ($ligne = $resultat->fetch()) {
+                                        $liste_modele .= '<option value="'.$ligne['id_marque'].'">'.$ligne['marque'].'</option>';
+                                    }
+                                    $liste_modele .= '</select>';
+                                    echo ($liste_modele);
+                                } catch (PDOException $e) {
+                                    echo "Erreur : " . $e->getMessage() . "<br/>";
+                                    die();
+                                }
+                            ?>
+                        </div>
+                        
+                        <div class="content_tab invisible"> <!-- bloc d'ajout dune nouvelle categorie -->
+                            <h3>Nom categorie :</h3>
+                            <input name="new_brand" type="text" disabled>
+                        </div> 
+                    </div>
                 </div>
             </div>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br>
+                                                                                                    <br> 
+                                                                                                    <br>  
+                                                                                                    <br>  
+                                                                                                    <br>  
+                                                                                                    <br>  
+                                                                                                    <br>  
+                                                                                                    <br>
+                                                                                                    <br>
                                                                                                     <br>
                                                                                                     <br>
                                                                                                     <br>
