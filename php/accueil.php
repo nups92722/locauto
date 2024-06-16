@@ -57,11 +57,20 @@
               unset($_SESSION['nouvelle_categorie']);
               $_SESSION['categorie'] = $connexion->lastInsertId();
             }
-            $requete = 'INSERT INTO modele (id_marque, modele, imagee, nb_de_place, id_categorie) VALUES (1, "'.$_SESSION['nouveau_modele'].'", "dd", '.$_SESSION['nombre_place'].', '.$_SESSION['categorie'].')';
+            if (isset($_SESSION['nouvelle_marque'])) {
+              $requete = 'INSERT INTO marque (marque) VALUES ("'.$_SESSION['nouvelle_marque'].'")';
+              $resultat = $connexion->query($requete);
+              unset($_SESSION['nouvelle_marque']);
+              $_SESSION['marque'] = $connexion->lastInsertId();
+            }
+            $requete = 'INSERT INTO modele (id_marque, modele, imagee, nb_de_place, id_categorie) VALUES ('.$_SESSION['marque'].', "'.$_SESSION['nouveau_modele'].'", "dd", '.$_SESSION['nombre_place'].', '.$_SESSION['categorie'].')';
             $resultat = $connexion->query($requete);
             unset($_SESSION['nouveau_modele']);
             $_SESSION['modele'] = $connexion->lastInsertId();
             }
+
+
+
             $requete = 'INSERT INTO voiture (immatriculation, compteur, id_modele, id_type_motorisation) VALUES ("'.$_SESSION['immatriculation'].'", '.$_SESSION['compteur'].', '.$_SESSION['modele'].', '.$_SESSION['motorisation'].')';
             $resultat = $connexion->query($requete);
 

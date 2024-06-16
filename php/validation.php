@@ -69,13 +69,13 @@
                     $_SESSION['nouvelle_categorie'] = $categorie = $_POST['new_category'];
                 }
                 if (isset($_POST['brand'])) {
-                    $_SESSION['brand'] = $_POST['brand'];
-                    $requete = 'SELECT * FROM categorie WHERE id_categorie = '.$_POST['brand'].'';
+                    $_SESSION['marque'] = $_POST['brand'];
+                    $requete = 'SELECT * FROM marque WHERE id_marque = '.$_POST['brand'].'';
                     $resultat = $connexion->query($requete);
                     $ligne = $resultat->fetch();
-                    $categorie = $ligne['marque'];
+                    $marque = $ligne['marque'];
                 } else {
-                    $_SESSION['nouvelle_categorie'] = $categorie = $_POST['new_category'];
+                    $_SESSION['nouvelle_marque'] = $marque = $_POST['new_brand'];
                 }
             }
             // gestion info motorisation
