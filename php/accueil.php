@@ -65,7 +65,7 @@
             }
             $requete = 'INSERT INTO modele (id_marque, modele, imagee, nb_de_place, id_categorie) VALUES ('.$_SESSION['marque'].', "'.$_SESSION['nouveau_modele'].'", "dd", '.$_SESSION['nombre_place'].', '.$_SESSION['categorie'].')';
             $resultat = $connexion->query($requete);
-            unset($_SESSION['nouveau_modele']);
+            unset($_SESSION['marque'], $_SESSION['nouveau_modele'], $_SESSION['nombre_place'], $_SESSION['categorie']);
             $_SESSION['modele'] = $connexion->lastInsertId();
             }
 
