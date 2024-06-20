@@ -23,7 +23,7 @@
 </header>
 <div class="card-container">
 <h1>Supprimer une voiture</h1>
-      <a href="/" class="hero-image-container">
+      <a class="hero-image-container">
         <img class="hero-image" src="https://images7.alphacoders.com/460/thumb-1920-460370.jpg" />
       </a>
       <main class="main-content">
