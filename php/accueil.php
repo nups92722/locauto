@@ -144,6 +144,34 @@
 </div>
     </section>
 
+      <div>
+      <form action="accueil.php" method="get">
+        <p>date debut location</p>
+        <input type="date">
+        <p>date fin location</p>
+        <input type="date">
+
+        <input name="date" type="submit" value="date">
+    </form>
+
+    <?php // creation du bloc selection des marques
+      try {
+          $requete = 'SELECT * FROM marque ORDER BY marque';
+          $resultat = $connexion->query($requete);
+          $liste_modele = '<select name="brand">';
+
+          while ($ligne = $resultat->fetch()) {
+              $liste_modele .= '<option value="'.$ligne['id_marque'].'">'.$ligne['marque'].'</option>';
+          }
+          $liste_modele .= '</select>';
+          echo ($liste_modele);
+      } catch (PDOException $e) {
+          echo "Erreur : " . $e->getMessage() . "<br/>";
+          die();
+      }
+    ?>
+      </div>
+
     <section class="vehicles">
     <?php
     try {
