@@ -192,6 +192,15 @@ INSERT INTO voiture (immatriculation, compteur, id_modele, id_type_motorisation)
 ('934 KDS 452', 114000, 27, 4),
 ('985 FSZ 238', 14, 27, 1);
 
+CREATE TABLE voiture(
+	id_etat INT (1) NOT NULL PRIMARY KEY,
+	etat VARCHAR NOT NULL
+);
+
+INSERT INTO etat_location (id_etat, etat) VALUES
+(1, 'fini'),
+(2, 'reserver'),
+(3, 'en cours');
 
 CREATE TABLE louer(
 	id_louer INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -202,9 +211,25 @@ CREATE TABLE louer(
 	immatriculation VARCHAR (16) NOT NULL,
     CONSTRAINT louer_voiture_FK FOREIGN KEY (immatriculation) REFERENCES voiture(immatriculation),
 	id_client INT NOT NULL,
-	CONSTRAINT louer_clients0_FK FOREIGN KEY (id_client) REFERENCES client(id_client)
+	CONSTRAINT louer_clients0_FK FOREIGN KEY (id_client) REFERENCES client(id_client),
+	etat INT(1) NOT NULL,
+	CONSTRAINT louer_etat_location_FK FOREIGN KEY (id_etat) REFERENCES etat_location(id_etat)
 );
 
+insert into louer (date_debut, date_fin, compteur_debut, compteur_fin, immatriculation, id_client) values
+('2004-10-10', '2004-10-12', 5, 10, '123 ABC 456', 3, 1),
+('2004-10-10', '2004-10-30', 5, 10, '215 QKX 284', 7, 1),
+('2004-10-10', '2005-01-01', 5, 10, '234 ATV 765', 8, 1),
+('2004-10-02', '2004-10-15', 5, 10, '238 SFG 387', 7, 1),
+('2004-10-11', '2004-10-17', 5, 10, '241 GST 356', 2, 1),
+('2004-10-06', '2004-10-10', 5, 10, '293 LXU 428', 1, 1),
+('2004-10-10', '2004-10-30', 5, 10, '349 DES 974', 8, 1),
+('2004-10-23', '2004-10-25', 5, 10, '426 DEH 935', 8, 1),
+('2004-10-14', '2004-10-27', 5, 10, '427 XHQ 765', 4, 1),
+('2004-10-16', '2004-10-19', 5, 10, '470 DKJ 639', 4, 1),
+('2004-10-14', '2004-10-23', 5, 10, '537 QSD 276', 4, 1),
+('2004-10-02', '2004-10-14', 5, 10, '542 SQU 387', 4, 1),
+('2004-10-01', '2004-10-10', 5, 10, '543 KDE 735', 4, 1);
 
 
 CREATE TABLE motorisation_existante(
