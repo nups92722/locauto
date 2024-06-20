@@ -3,10 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/validation.css">
+    <link rel="stylesheet" href="../css/basic.css">
     <title>Document</title>
 </head>
 
 <body>
+<header class="header-outer">
+	<div class="header-inner responsive-wrapper">
+		<div class="header-logo">
+			<img src="../image/logovrai.png" />
+		</div>
+		<nav class="header-navigation">
+                <a href="accueil.php">Accueil</a>
+                <a href="ajout.php">Ajouter voiture</a>
+                <a href="supprime.php">Supprimer voiture</a>
+			<button>Menu</button>
+		</nav>
+	</div>
+</header>
     <?php
         session_start();
 
@@ -21,12 +36,12 @@
     <?php
     try { 
         function print_car_data($immatriculation, $compteur, $motorisation, $modele, $nombre_place, $categorie){
-            echo ('<p>la plaque d\'immatriculation est '.$immatriculation.'</p>');
-            echo ('<p>le compteur est '.$compteur.'</p>');
-            echo ('<p>la motorisation est '.$motorisation.'</p>');
-            echo ('<p>le modele est '.$modele.'</p>');
-            echo ('<p>le nombre de place est '.$nombre_place.'</p>');
-            echo ('<p>la categorie est '.$categorie.'</p>');
+            echo ('<div class="card-container"><p>Nom de la plaque d\'immatriculation: '.$immatriculation.'</p>');
+            echo ('<p>le compteur possède '.$compteur.'km</p>');
+            echo ('<p>la motorisation est de type '.$motorisation.'</p>');
+            echo ('<p>Numéro du modèle: '.$modele.'</p>');
+            echo ('<p>Il y a '.$nombre_place.' places dans le véhicule</p>');
+            echo ('<p>la categorie est de type '.$categorie.'</p><form action="accueil.php" method="post"><input class="valider" name="valider" type="submit" value="Valider"><input name="annuler" type="submit" value="Annuler"></form></div>');
         }
 
         // code pour verification supression de voiture
@@ -98,9 +113,5 @@
         die();
     }
     ?>
-    <form action="accueil.php" method="post">
-        <input name="valider" type="submit" value="valider">
-        <input name="annuler" type="submit" value="annuler">
-    </form>
 </body>
 </html>
