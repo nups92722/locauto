@@ -175,7 +175,7 @@
     <section class="vehicles">
     <?php
     try {
-        $requete = 'SELECT * FROM voiture JOIN modele USING(id_modele) JOIN marque USING(id_marque)';
+        $requete = 'select marque, modele, imagee, id_modele, count(id_modele) from voiture JOIN modele USING(id_modele) JOIN marque USING(id_marque) left join louer using (immatriculation) where date_fin < "2004-10-15" or date_debut > "2004-10-16" or id_louer is null group by id_modele';
         $resultat = $connexion->query($requete);
         
         while ($voiture = $resultat->fetch()) {

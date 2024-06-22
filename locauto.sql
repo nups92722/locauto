@@ -217,7 +217,7 @@ CREATE TABLE louer(
 	CONSTRAINT louer_etat_location_FK FOREIGN KEY (id_etat) REFERENCES etat_location(id_etat)
 );
 
-insert into louer (date_debut, date_fin, compteur_debut, compteur_fin, immatriculation, id_client, etat) values
+insert into louer (date_debut, date_fin, compteur_debut, compteur_fin, immatriculation, id_client, id_etat) values
 ('2004-10-10', '2004-10-12', 5, 10, '123 ABC 456', 3, 1),
 ('2004-10-10', '2004-10-30', 5, 10, '215 QKX 284', 7, 1),
 ('2004-10-10', '2005-01-01', 5, 10, '234 ATV 765', 8, 1),
