@@ -9,19 +9,9 @@
 </head>
 
 <body>
-<header class="header-outer">
-	<div class="header-inner responsive-wrapper">
-		<div class="header-logo">
-			<img src="../image/logovrai.png" />
-		</div>
-		<nav class="header-navigation">
-                <a href="accueil.php">Accueil</a>
-                <a href="ajout.php">Ajouter voiture</a>
-                <a href="supprime.php">Supprimer voiture</a>
-			<button>Menu</button>
-		</nav>
-	</div>
-</header>
+    <?php
+    include 'header.html';
+    ?>
     <?php
         session_start();
 
@@ -41,7 +31,7 @@
             echo ('<p>la motorisation est de type '.$motorisation.'</p>');
             echo ('<p>Numéro du modèle: '.$modele.'</p>');
             echo ('<p>Il y a '.$nombre_place.' places dans le véhicule</p>');
-            echo ('<p>la categorie est de type '.$categorie.'</p><form action="accueil.php" method="post"><input class="valider" name="valider" type="submit" value="Valider"><input name="annuler" type="submit" value="Annuler"></form></div>');
+            echo ('<p>la categorie est de type '.$categorie.'</p><form action="accueil.php" method="post"><input class="valider" name="valider" type="submit" value="valider"><input name="annuler" type="submit" value="annuler"></form></div>');
         }
 
         // code pour verification supression de voiture
@@ -113,5 +103,10 @@
         die();
     }
     ?>
+
+    <?php
+        include 'footer.html';
+    ?>
+
 </body>
 </html>

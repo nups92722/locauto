@@ -17,73 +17,81 @@
           echo "Erreur : " . $e->getMessage() . "<br/>";
           die();
       }
-
+      unset($_SESSION['date_debut'], $_SESSION['date_fin']);
+      $_SESSION['date_debut'] = "2004-01-01";
+      $_SESSION['date_fin'] = "2004-01-01";
       try {
-        if (isset($_SESSION['retirer'])) {
-          $requete = 'SELECT * FROM voiture WHERE immatriculation = "'.$_SESSION['retirer'].'"';
-          $resultat = $connexion->query($requete);
-          $ligne = $resultat->fetch();
-          $id_modele = $ligne['id_modele'];
-          $id_type_motorisation = $ligne['id_type_motorisation'];
-
-          $requete = 'SELECT * FROM motorisation_existante WHERE id_modele = '.$id_modele.' and id_type_motorisation = '.$id_type_motorisation.'';
-          $resultat = $connexion->query($requete);
-          $ligne = $resultat->fetch();
-
-          if ($ligne['nb_voiture'] > 1) {
-            $requete = 'UPDATE motorisation_existante SET nb_voiture = '.$ligne['nb_voiture'].' - 1 WHERE id_modele = '.$id_modele.' and id_type_motorisation = '.$id_type_motorisation.'';
-            $resultat = $connexion->query($requete);
-          } else {
-            $requete = 'DELETE FROM motorisation_existante WHERE id_modele = '.$id_modele.' and id_type_motorisation = '.$id_type_motorisation.'';
-            $resultat = $connexion->query($requete);
-          }
-          $requete = 'DELETE FROM voiture WHERE immatriculation = "'.$_SESSION['retirer'].'"';
-          $resultat = $connexion->query($requete);
-          unset($_SESSION['retirer']);
+        if (isset($_POST['date'])) {
+          $_SESSION['date_debut'] = $_POST['date_debut'];
+          $_SESSION['date_fin'] = $_POST['date_fin'];
         }
-
-        if (isset($_SESSION['immatriculation'])) {
-          if (isset($_SESSION['nouvelle_motorisation'])) {
-            $requete = 'INSERT INTO type_motorisation (motorisation) VALUES ("'.$_SESSION['nouvelle_motorisation'].'")';
+        if (isset($_POST['valider'])) {
+          if (isset($_SESSION['retirer'])) {
+            $requete = 'SELECT * FROM voiture WHERE immatriculation = "'.$_SESSION['retirer'].'"';
             $resultat = $connexion->query($requete);
-            unset($_SESSION['nouvelle_motorisation']);
-            $_SESSION['motorisation'] = $connexion->lastInsertId();
-          }
+            $ligne = $resultat->fetch();
+            $id_modele = $ligne['id_modele'];
+            $id_type_motorisation = $ligne['id_type_motorisation'];
 
-          if (isset($_SESSION['nouveau_modele'])) {
-            if (isset($_SESSION['nouvelle_categorie'])) {
-              $requete = 'INSERT INTO categorie (categorie, prix) VALUES ("'.$_SESSION['nouvelle_categorie'].'", 10)';
-              $resultat = $connexion->query($requete);
-              unset($_SESSION['nouvelle_categorie']);
-              $_SESSION['categorie'] = $connexion->lastInsertId();
-            }
-            if (isset($_SESSION['nouvelle_marque'])) {
-              $requete = 'INSERT INTO marque (marque) VALUES ("'.$_SESSION['nouvelle_marque'].'")';
-              $resultat = $connexion->query($requete);
-              unset($_SESSION['nouvelle_marque']);
-              $_SESSION['marque'] = $connexion->lastInsertId();
-            }
-            $requete = 'INSERT INTO modele (id_marque, modele, imagee, nb_de_place, id_categorie) VALUES ('.$_SESSION['marque'].', "'.$_SESSION['nouveau_modele'].'", "dd", '.$_SESSION['nombre_place'].', '.$_SESSION['categorie'].')';
+            $requete = 'SELECT * FROM motorisation_existante WHERE id_modele = '.$id_modele.' and id_type_motorisation = '.$id_type_motorisation.'';
             $resultat = $connexion->query($requete);
-            unset($_SESSION['marque'], $_SESSION['nouveau_modele'], $_SESSION['nombre_place'], $_SESSION['categorie']);
-            $_SESSION['modele'] = $connexion->lastInsertId();
-            }
+            $ligne = $resultat->fetch();
 
-
-
-            $requete = 'INSERT INTO voiture (immatriculation, compteur, id_modele, id_type_motorisation) VALUES ("'.$_SESSION['immatriculation'].'", '.$_SESSION['compteur'].', '.$_SESSION['modele'].', '.$_SESSION['motorisation'].')';
-            $resultat = $connexion->query($requete);
-
-            $requete = 'SELECT * FROM motorisation_existante JOIN voiture USING (id_modele, id_type_motorisation) WHERE id_modele = '.$_SESSION['modele'].' and id_type_motorisation = '.$_SESSION['motorisation'].'';
-            $resultat = $connexion->query($requete);
-            if ($ligne = $resultat->fetch()) {
-              $requete = 'UPDATE motorisation_existante SET nb_voiture = '.$ligne['nb_voiture'].' + 1 WHERE id_modele = '.$_SESSION['modele'].' and id_type_motorisation = '.$_SESSION['motorisation'].'';
+            if ($ligne['nb_voiture'] > 1) {
+              $requete = 'UPDATE motorisation_existante SET nb_voiture = '.$ligne['nb_voiture'].' - 1 WHERE id_modele = '.$id_modele.' and id_type_motorisation = '.$id_type_motorisation.'';
               $resultat = $connexion->query($requete);
             } else {
-              $requete = 'INSERT INTO motorisation_existante (id_modele, id_type_motorisation, nb_voiture) VALUES ('.$_SESSION['modele'].', '.$_SESSION['motorisation'].', 1)';
+              $requete = 'DELETE FROM motorisation_existante WHERE id_modele = '.$id_modele.' and id_type_motorisation = '.$id_type_motorisation.'';
               $resultat = $connexion->query($requete);
             }
-            unset($_SESSION['immatriculation'], $_SESSION['compteur'], $_SESSION['modele'], $_SESSION['motorisation']);
+            $requete = 'DELETE FROM voiture WHERE immatriculation = "'.$_SESSION['retirer'].'"';
+            $resultat = $connexion->query($requete);
+            unset($_SESSION['retirer']);
+          }
+
+          if (isset($_SESSION['immatriculation'])) {
+            if (isset($_SESSION['nouvelle_motorisation'])) {
+              $requete = 'INSERT INTO type_motorisation (motorisation) VALUES ("'.$_SESSION['nouvelle_motorisation'].'")';
+              $resultat = $connexion->query($requete);
+              unset($_SESSION['nouvelle_motorisation']);
+              $_SESSION['motorisation'] = $connexion->lastInsertId();
+            }
+
+            if (isset($_SESSION['nouveau_modele'])) {
+              if (isset($_SESSION['nouvelle_categorie'])) {
+                $requete = 'INSERT INTO categorie (categorie, prix) VALUES ("'.$_SESSION['nouvelle_categorie'].'", 10)';
+                $resultat = $connexion->query($requete);
+                unset($_SESSION['nouvelle_categorie']);
+                $_SESSION['categorie'] = $connexion->lastInsertId();
+              }
+              if (isset($_SESSION['nouvelle_marque'])) {
+                $requete = 'INSERT INTO marque (marque) VALUES ("'.$_SESSION['nouvelle_marque'].'")';
+                $resultat = $connexion->query($requete);
+                unset($_SESSION['nouvelle_marque']);
+                $_SESSION['marque'] = $connexion->lastInsertId();
+              }
+              $requete = 'INSERT INTO modele (id_marque, modele, imagee, nb_de_place, id_categorie) VALUES ('.$_SESSION['marque'].', "'.$_SESSION['nouveau_modele'].'", "dd", '.$_SESSION['nombre_place'].', '.$_SESSION['categorie'].')';
+              $resultat = $connexion->query($requete);
+              unset($_SESSION['marque'], $_SESSION['nouveau_modele'], $_SESSION['nombre_place'], $_SESSION['categorie']);
+              $_SESSION['modele'] = $connexion->lastInsertId();
+              }
+
+
+
+              $requete = 'INSERT INTO voiture (immatriculation, compteur, id_modele, id_type_motorisation) VALUES ("'.$_SESSION['immatriculation'].'", '.$_SESSION['compteur'].', '.$_SESSION['modele'].', '.$_SESSION['motorisation'].')';
+              $resultat = $connexion->query($requete);
+
+              $requete = 'SELECT * FROM motorisation_existante JOIN voiture USING (id_modele, id_type_motorisation) WHERE id_modele = '.$_SESSION['modele'].' and id_type_motorisation = '.$_SESSION['motorisation'].'';
+              $resultat = $connexion->query($requete);
+              if ($ligne = $resultat->fetch()) {
+                $requete = 'UPDATE motorisation_existante SET nb_voiture = '.$ligne['nb_voiture'].' + 1 WHERE id_modele = '.$_SESSION['modele'].' and id_type_motorisation = '.$_SESSION['motorisation'].'';
+                $resultat = $connexion->query($requete);
+              } else {
+                $requete = 'INSERT INTO motorisation_existante (id_modele, id_type_motorisation, nb_voiture) VALUES ('.$_SESSION['modele'].', '.$_SESSION['motorisation'].', 1)';
+                $resultat = $connexion->query($requete);
+              }
+              unset($_SESSION['immatriculation'], $_SESSION['compteur'], $_SESSION['modele'], $_SESSION['motorisation']);
+            }
           }
         } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage() . "<br/>";
@@ -91,19 +99,10 @@
       }
     ?>
 
-    <header class="header-outer">
-        <div class="header-inner responsive-wrapper">
-            <div class="header-logo">
-                <img src="../image/logovrai.png" />
-            </div>
-            <nav class="header-navigation">
-                <a href="accueil.php">Accueil</a>
-                <a href="ajout.php">Ajouter voiture</a>
-                <a href="supprime.php">Supprimer voiture</a>
-                <button>Menu</button>
-            </nav>
-        </div>
-    </header>
+<?php
+  include 'header.html';
+?>
+
 <div class="hero">
   <div class="hero__bg">
     <picture>
@@ -145,11 +144,15 @@
     </section>
 
       <div>
-      <form action="accueil.php" method="get">
+      <form action="accueil.php" method="post">
         <p>date debut location</p>
-        <input type="date">
+        <?php
+        echo ('<input type="date" name="date_debut" value="'.$_SESSION['date_debut'].'">');
+        ?>
         <p>date fin location</p>
-        <input type="date">
+        <?php
+          echo ('<input type="date" name="date_fin" value="'.$_SESSION['date_fin'].'">');
+        ?>
 
         <input name="date" type="submit" value="date">
     </form>
@@ -175,7 +178,18 @@
     <section class="vehicles">
     <?php
     try {
-        $requete = 'select marque, modele, imagee, id_modele, count(id_modele) from voiture JOIN modele USING(id_modele) JOIN marque USING(id_marque) left join louer using (immatriculation) where date_fin < "2004-10-15" or date_debut > "2004-10-16" or id_louer is null group by id_modele';
+        $requete = 'select *
+from modele join marque using (id_marque)
+where id_modele in (
+select id_modele
+from modele as m
+where (select count(immatriculation) 
+from voiture 
+where id_modele = m.id_modele ) 
+>
+(select count(distinct immatriculation)
+from voiture left join louer using (immatriculation)
+where (not (date_debut > "'.$_SESSION['date_fin'].'" or date_fin < "'.$_SESSION['date_debut'].'")) and id_modele = m.id_modele))';
         $resultat = $connexion->query($requete);
         
         while ($voiture = $resultat->fetch()) {
@@ -192,8 +206,11 @@
     }
     ?>
     </section>
-    <footer>
-        <p>&copy; 2024 Location de Voitures. Tous droits réservés.</p>
-    </footer>
+
+  <?php
+    include 'footer.html';
+  ?>
+    
 </body>
 </html>
+

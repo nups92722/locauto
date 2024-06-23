@@ -11,19 +11,9 @@
 </head>
 
 <body>
-<header class="header-outer">
-	<div class="header-inner responsive-wrapper">
-		<div class="header-logo">
-			<img src="../image/logovrai.png" />
-		</div>
-		<nav class="header-navigation">
-                <a href="accueil.php">Accueil</a>
-                <a href="ajout.php">Ajouter voiture</a>
-                <a href="supprime.php">Supprimer voiture</a>
-			<button>Menu</button>
-		</nav>
-	</div>
-</header>
+    <?php
+    include 'header.html';
+    ?>
 
     <?php
         try {
@@ -260,5 +250,10 @@
 
         <input name="submit" type="submit" value="valider">
     </form>
+
+    <?php
+        include 'footer.html';
+    ?>
+
 </body>
 </html>
