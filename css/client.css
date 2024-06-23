@@ -76,3 +76,7 @@ footer {
     font: 24px/180px serif;
     text-decoration: none;
   }
+
+  body{
+    margin:0px;
+  }
