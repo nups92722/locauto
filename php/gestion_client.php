@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/gestion_client.css">
     <link rel="stylesheet" href="../css/basic.css">
     <title>Document</title>
 </head>
@@ -53,13 +54,13 @@ if ($_GET['id_client'] == "nouveau") {
     $client = $resultat->fetch();
     echo ('<form action="client.php" method="post">
     <input name="id" type="hidden" value="'.$_GET['id_client'].'">
-    <p>nom</p>
+    <p class="p">Nom</p>
     <input name="nom" type="text" value="'.$client['nom'].'">
-    <p>prenom</p>
+    <p>Prenom</p>
     <input name="prenom" type="text" value="'.$client['prenom'].'">
-    <p>adresse</p>
+    <p>Adresse</p>
     <input name="adresse" type="text" value="'.$client['adresse'].'">
-    <p>type client</p>');
+    <p>Type Client</p>');
     $requete = 'SELECT * FROM type_client';
     $resultat = $connexion->query($requete);
     $type_client = '<select name="type_client">';

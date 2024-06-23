@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+input[type=text] {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: 0.2em solid #1e9be9;
+    background: rgba(54, 30, 233, 0.2);
+    border-radius: 0.2em 0.2em 0 0;
+    padding: 0.4em;
+  }
+
+  .p {
+    font: var(--var-heading);
+    color: var(--var-lightest);
+    padding: 1.2em 0;
+}
+
+select {
+    appearance: none;
+    outline: 10px red;
+    border: 0;
+    box-shadow: none;
+    flex: 1;
+    padding: 0 1em;
+    color: #fff;
+    background-color: var(--darkgray);
+    background-image: none;
+    cursor: pointer;
+    margin-left: 10px;
+}

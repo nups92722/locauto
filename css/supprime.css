@@ -188,3 +188,10 @@ div.attribution {
         font-size: 18px;
     }
 }
+
+footer{
+    position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
