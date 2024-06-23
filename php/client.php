@@ -51,19 +51,18 @@
                         <th>type client</th>
                     </tr>
                 </thead>');
+                echo ('<tbody>');
         while ($client = $resultat->fetch()) {
-            echo ('<tbody>
-            <tr>
+            echo ('<tr>
                 <td>'.$client['nom'].'</td>
                 <td>'.$client['prenom'].'</td>
                 <td>'.$client['adresse'].'</td>
                 <td>'.$client['type_client'].'</td>
                 <td><a href="gestion_client.php?id_client='.$client["id_client"].'">modifier client</a></td>
                 <td><a href="reservation_client.php?id_client='.$client["id_client"].'">réservation client</a></td>
-            </tr>
-        </tbody>');
+            </tr>');
     }
-    echo ('</table>');
+    echo ('</tbody></table>');
         
     } catch (PDOException $e) {
         echo "Erreur : " . $e->getMessage() . "<br/>";

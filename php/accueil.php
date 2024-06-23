@@ -30,6 +30,12 @@
           $_SESSION['date_debut'] = $date;
           $_SESSION['date_fin'] = $date;
         }
+
+        if (isset($_POST['reservation'])) {
+          $requete = 'insert into louer (date_debut, date_fin, compteur_debut, compteur_fin, immatriculation, id_client, id_etat) values ("'..'", "'..'", '..', '..', '..', , 2)';
+          $resultat = $connexion->query($requete);
+        }
+
         if (isset($_POST['valider'])) {
           if (isset($_SESSION['retirer'])) {
             $requete = 'SELECT * FROM voiture WHERE immatriculation = "'.$_SESSION['retirer'].'"';

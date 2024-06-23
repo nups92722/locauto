@@ -21,16 +21,21 @@
     <?php
     include 'header.html';
     ?>
-    <form action="accueil.php" method="get">
-        <p>date debut location</p>
-        <?php
-        echo ('<input type="date" name="date_debut" value="'.$_SESSION['date_debut'].'" min="'.$date.'">');
-        ?>
-        <p>date fin location</p>
-        <?php
-          echo ('<input type="date" name="date_fin" value="'.$_SESSION['date_fin'].'" min="'.$date.'">');
+
+    <form action="accueil.php" method="post">
+    <?php
+    $location = [
+        "id_client" => "Dupont",
+        "id_modele" => "Jean",
+        "date_debut" => 30,
+        "date_fin" => 30,
+    ];
+
+        echo ('<p>date debut location : '.$_SESSION['date_debut'].'</p>
+        <p>date fin location : '.$_SESSION['date_fin'].'</p>');
         ?>
     <?php
+
     $requete = 'select *
         from modele join marque using (id_marque)
         where id_modele = '.$_GET["modele"].'';
@@ -60,7 +65,7 @@ echo ($liste_modele);
     ?>
     <br>
     <br>
-        <input type="submit">
+        <input name="reservation" value="reservation" type="submit"></input>
         </form>
     <?php
         include 'footer.html';
