@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/accueil.css">
     <link rel="stylesheet" href="../css/basic.css">
+    <script src="../js/accueil.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -165,7 +166,8 @@
           $requete = 'SELECT * FROM marque ORDER BY marque';
           $resultat = $connexion->query($requete);
           $liste_modele = '<select name="brand">';
-
+          $liste_modele .= '<option value="toute">Toute</option>';
+ 
           while ($ligne = $resultat->fetch()) {
               $liste_modele .= '<option value="'.$ligne['id_marque'].'">'.$ligne['marque'].'</option>';
           }
@@ -196,7 +198,7 @@ where (not (date_debut > "'.$_SESSION['date_fin'].'" or date_fin < "'.$_SESSION[
         $resultat = $connexion->query($requete);
         
         while ($voiture = $resultat->fetch()) {
-            echo ('<div class="vehicle">');
+            echo ('<div class="vehicle" data-idmarque="'.$voiture["id_marque"].'">');
             echo ('<img src="../image/'.$voiture["imagee"].'" alt="Voiture">');
             echo ('<h3>Modèle : '.$voiture["modele"].'</h3>');
             echo ('<p>Marque : '.$voiture["marque"].'</p>');
