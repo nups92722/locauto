@@ -21,9 +21,25 @@
             die();
         }
     ?>
+
+    <?php
+        if (isset($_POST['ajouter'])) {
+            $requete = 'INSERT INTO client (nom, prenom, adresse, id_type_client) VALUES ("'.$_POST['nom'].'", "'.$_POST['prenom'].'", "'.$_POST['adresse'].'", '.$_POST['type_client'].')';
+            $resultat = $connexion->query($requete);
+        }
+        if (isset($_POST['modifier'])) {
+            $requete = 'UPDATE client set nom = "'.$_POST['nom'].'", prenom = "'.$_POST['prenom'].'", adresse = "'.$_POST['adresse'].'", id_type_client = '.$_POST['type_client'].' where id_client = '.$_POST['id'].'';
+            $resultat = $connexion->query($requete);
+        }
+    ?>
+
+    <a href="gestion_client.php?id_client=nouveau">ajouter client</a>
+    <br>
+    <br>
+
     <?php
     try {
-        $requete = 'select * FROM client join type_client using(id_type_client)';
+        $requete = 'select * FROM client join type_client using(id_type_client) order by nom';
         $resultat = $connexion->query($requete);
         
         echo ('<table>
@@ -42,7 +58,8 @@
                 <td>'.$client['prenom'].'</td>
                 <td>'.$client['adresse'].'</td>
                 <td>'.$client['type_client'].'</td>
-                <td><a href="modifier_client.php?modele='.$client["id_client"].'">modifier client</a></td>
+                <td><a href="gestion_client.php?id_client='.$client["id_client"].'">modifier client</a></td>
+                <td><a href="reservation_client.php?id_client='.$client["id_client"].'">réservation client</a></td>
             </tr>
         </tbody>');
     }
