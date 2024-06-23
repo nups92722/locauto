@@ -1,0 +1,78 @@
+.ajout_a {
+    color: #0063e4;
+    font-size: 1.3rem;
+    text-decoration: none;
+    margin-top: 1em;
+    display: inline-block;
+    font-weight: bold;
+    padding: 0.5em;
+    margin-left: -0.5em;
+    position: relative;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  .ajout_a:before, .ajout_a:after {
+    position: absolute;
+    content: "";
+    border-bottom: 3px solid #0063e4;
+    border-radius: 1em;
+    bottom: 0.3em;
+    transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  .ajout_a:before {
+    width: 1em;
+    transform-origin: left;
+  }
+  .ajout_a:after {
+    width: 82%;
+    left: 1em;
+    transform: translateX(110%);
+  }
+  .ajout_a:hover:before {
+    transform: scaleX(0.3);
+  }
+  .ajout_a:hover:after {
+    transform: translateX(0);
+  }
+
+  .dessus {
+    background-image: linear-gradient(to right, #54b3d6, #54b3d6 50%, #000 50%);
+    background-size: 200% 100%;
+    background-position: -100%;
+    display: inline-block;
+    padding: 5px 0;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .dessus:before {
+    content: "";
+    background: #54b3d6;
+    display: block;
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .dessus:hover {
+    background-position: 0;
+  }
+  
+  .dessus:hover::before {
+    width: 100%;
+  }
+
+footer {
+    text-align: center;
+    background: #222;
+  }
+  footer a {
+    border-bottom: 1px solid #666;
+    color: #eee;
+    font: 24px/180px serif;
+    text-decoration: none;
+  }

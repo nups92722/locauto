@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/client.css">
     <link rel="stylesheet" href="../css/basic.css">
     <title>Document</title>
 </head>
@@ -33,7 +34,7 @@
         }
     ?>
 
-    <a href="gestion_client.php?id_client=nouveau">ajouter client</a>
+    <a class="ajout_a" href="gestion_client.php?id_client=nouveau">Ajouter un Client</a>
     <br>
     <br>
 
@@ -46,9 +47,9 @@
                 <thead>
                     <tr>
                         <th>Nom</th>
-                        <th>prenom</th>
-                        <th>adresse</th>
-                        <th>type client</th>
+                        <th>Prenom</th>
+                        <th>Adresse</th>
+                        <th>Type Client</th>
                     </tr>
                 </thead>');
                 echo ('<tbody>');
@@ -58,8 +59,8 @@
                 <td>'.$client['prenom'].'</td>
                 <td>'.$client['adresse'].'</td>
                 <td>'.$client['type_client'].'</td>
-                <td><a href="gestion_client.php?id_client='.$client["id_client"].'">modifier client</a></td>
-                <td><a href="reservation_client.php?id_client='.$client["id_client"].'">réservation client</a></td>
+                <td><a class="dessus" href="gestion_client.php?id_client='.$client["id_client"].'">Modifier Client</a></td>
+                <td><a class="dessus" href="reservation_client.php?id_client='.$client["id_client"].'">Réservation Client</a></td>
             </tr>');
     }
     echo ('</tbody></table>');
