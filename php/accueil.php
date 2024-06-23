@@ -13,17 +13,21 @@
 
       try {
           $connexion = new PDO('mysql:host=localhost;dbname=locauto', 'root', ''); // ajouter le nom de la base de donne
+          $aujourdhui = new DateTime();
+          $date = $aujourdhui->format('Y-m-d');
           } catch (PDOException $e) {
           echo "Erreur : " . $e->getMessage() . "<br/>";
           die();
       }
       unset($_SESSION['date_debut'], $_SESSION['date_fin']);
-      $_SESSION['date_debut'] = "2004-01-01";
-      $_SESSION['date_fin'] = "2004-01-01";
+      
       try {
         if (isset($_POST['date'])) {
           $_SESSION['date_debut'] = $_POST['date_debut'];
           $_SESSION['date_fin'] = $_POST['date_fin'];
+        } else {
+          $_SESSION['date_debut'] = $date;
+          $_SESSION['date_fin'] = $date;
         }
         if (isset($_POST['valider'])) {
           if (isset($_SESSION['retirer'])) {
@@ -147,13 +151,12 @@
       <form action="accueil.php" method="post">
         <p>date debut location</p>
         <?php
-        echo ('<input type="date" name="date_debut" value="'.$_SESSION['date_debut'].'">');
+        echo ('<input type="date" name="date_debut" value="'.$_SESSION['date_debut'].'" min="'.$date.'">');
         ?>
         <p>date fin location</p>
         <?php
-          echo ('<input type="date" name="date_fin" value="'.$_SESSION['date_fin'].'">');
+          echo ('<input type="date" name="date_fin" value="'.$_SESSION['date_fin'].'" min="'.$date.'">');
         ?>
-
         <input name="date" type="submit" value="date">
     </form>
 
