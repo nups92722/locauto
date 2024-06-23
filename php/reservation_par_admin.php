@@ -26,6 +26,12 @@ try {
 ?>
 
 <?php
+    $_SESSION['location'] = [
+        "id_client" => $_GET["id_client"],
+        "id_modele" => null,
+        "date_debut" => null,
+        "date_fin" => null
+    ];
   include 'liste_voiture_date.php';
 ?>
 

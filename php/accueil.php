@@ -23,17 +23,26 @@
       unset($_SESSION['date_debut'], $_SESSION['date_fin']);
       
       try {
+        if (isset($_POST['reservation'])) {
+          $requete = 'select immatriculation from voiture
+where id_modele = '.$_SESSION['location']['id_modele'].' and id_type_motorisation = '.$_POST["motorisation"].' and immatriculation not in
+(select distinct immatriculation
+from voiture left join louer using (immatriculation)
+where not (date_debut > "'.$_SESSION['location']['date_fin'].'" or date_fin < "'.$_SESSION['location']['date_debut'].'") and '.$_SESSION['location']['id_modele'].' = id_modele)';
+$resultat = $connexion->query($requete);
+$voiture = $resultat->fetch();
+
+$requete = 'insert into louer (date_debut, date_fin, compteur_debut, compteur_fin, immatriculation, id_client, id_etat) values ("'.$_SESSION['location']["date_debut"].'", "'.$_SESSION['location']["date_fin"].'", 0, 0, "'.$voiture['immatriculation'].'", '.$_SESSION['location']["id_client"].', 2)';
+          $resultat = $connexion->query($requete);
+          unset($_SESSION['location']);
+        }
+
         if (isset($_POST['date'])) {
           $_SESSION['date_debut'] = $_POST['date_debut'];
           $_SESSION['date_fin'] = $_POST['date_fin'];
         } else {
           $_SESSION['date_debut'] = $date;
           $_SESSION['date_fin'] = $date;
-        }
-
-        if (isset($_POST['reservation'])) {
-          $requete = 'insert into louer (date_debut, date_fin, compteur_debut, compteur_fin, immatriculation, id_client, id_etat) values ("'..'", "'..'", '..', '..', '..', , 2)';
-          $resultat = $connexion->query($requete);
         }
 
         if (isset($_POST['valider'])) {

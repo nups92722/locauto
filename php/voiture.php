@@ -24,12 +24,9 @@
 
     <form action="accueil.php" method="post">
     <?php
-    $location = [
-        "id_client" => "Dupont",
-        "id_modele" => "Jean",
-        "date_debut" => 30,
-        "date_fin" => 30,
-    ];
+    $_SESSION['location']['id_modele'] = $_GET["modele"];
+    $_SESSION['location']['date_debut'] = $_SESSION['date_debut'];
+    $_SESSION['location']['date_fin'] = $_SESSION['date_fin'];
 
         echo ('<p>date debut location : '.$_SESSION['date_debut'].'</p>
         <p>date fin location : '.$_SESSION['date_fin'].'</p>');
